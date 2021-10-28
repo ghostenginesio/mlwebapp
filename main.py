@@ -228,7 +228,7 @@ def main():
     
             
     
-    if st.checkbox("Total working days of Empployees"):
+    if st.checkbox("Total working days of Employees"):
         st.write(plot())
     if st.checkbox("Entering time of Employees in Office"):
         st.write(plot1())
