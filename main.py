@@ -36,6 +36,7 @@ for i in l:
   total_days.append(tem.shape[0])
   tem['presenty'] = tem['new_sta'].sum()
   df = pd.concat([tem, df], axis = 0)
+df = df.sort_values('presenty', ascending=False)
 
 def plot():
     plt.figure(figsize = (20,10))
@@ -227,13 +228,13 @@ def main():
     
             
     
-    if st.checkbox("Plot"):
+    if st.checkbox("Total working days of Empployees"):
         st.write(plot())
-    if st.checkbox("Plot1"):
+    if st.checkbox("Entering time of Employees in Office"):
         st.write(plot1())
-    if st.checkbox("Plot3"):
+    if st.checkbox("Leaving time of Employees in Office"):
         st.write(plot3())
-    if st.checkbox("Plot4"):
+    if st.checkbox("Stats regard to Employee Work in Office"):
         col = list(df['Employee_Name'].unique())
         person= st.selectbox('sel',col)
         st.write(plot4(person))
