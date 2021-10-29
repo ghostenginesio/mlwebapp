@@ -277,7 +277,7 @@ def main():
     if st.checkbox("Entering time of Employees in Office"):
         st.write(plot1())
     if st.checkbox("Leaving time of Employees in Office"):
-	st.write(plot2())
+        st.write(plot2())
     if st.checkbox("Working time of Employees in Office"):
         st.write(plot3())
     if st.checkbox("Stats regard to Employee Work in Office"):
