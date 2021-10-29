@@ -124,6 +124,50 @@ def plot1():
     plt.show()
     st.pyplot(fig)
 
+def plot2():
+
+
+    tem = df[df['leave_time1']!=0.0]
+    l = list(tem['Employee_Name'].unique())
+    ord = []
+    leave = []
+    early_leave = []
+    late_leave = []
+    for i in l:
+        tem1 = tem[tem['Employee_Name'] == i]
+        leave.append(tem1['leave_time1'].mean())
+        early_leave.append(tem1['leave_time1'].min())
+        late_leave.append(tem1['leave_time1'].max())
+        ord.append(i)
+
+    newdf = pd.DataFrame({'order':ord, "leave":leave})
+
+    newdf = newdf.sort_values('leave', ascending=False)
+
+    ord = list(newdf['order'])
+    
+    plt.figure(figsize = (10,10))
+    fig, ax = plt.subplots()    
+
+    sns.set(font_scale=5)
+    sns.set_theme(style="whitegrid")
+    ax = sns.barplot(y='Employee_Name', x= 'leave_time1', data=tem, errwidth = 3,order = ord, color = 'blue',
+                    capsize=.4,  estimator=np.mean, alpha = 0.8)
+
+    ax.set(xlim=(12, max(late_leave)+0.5))
+
+    ax.set_xlabel("leaving time", fontsize = 20)
+    ax.set_ylabel("Employee name", fontsize = 20)
+    plt.title('leaving Time of the Employers from office')
+    plt.axvspan(min(early_leave)-0.5, 19, color='red', alpha=0.2, label = 'early leave from office')
+
+    plt.axvspan(19, max(late_leave)+0.5, color='green', alpha=0.2, label = 'late leave from office')
+    
+    plt.legend()
+    plt.show()
+    st.pyplot(fig)
+
+
 def plot3():
     import seaborn as sns
     import matplotlib.pyplot as plt
@@ -233,6 +277,8 @@ def main():
     if st.checkbox("Entering time of Employees in Office"):
         st.write(plot1())
     if st.checkbox("Leaving time of Employees in Office"):
+	st.write(plot2())
+    if st.checkbox("Working time of Employees in Office"):
         st.write(plot3())
     if st.checkbox("Stats regard to Employee Work in Office"):
         col = list(df['Employee_Name'].unique())
