@@ -14,7 +14,8 @@ from  PIL import Image
 st.title('Homekonnect')
 st.header('Data visualization')
 
-data='DailyAttendanceLogsDetails.csv'
+data = st.file_uploader("Pick a file")
+#data='DailyAttendanceLogsDetails.csv'
 df = pd.read_csv(data)
 @st.cache(persist=True)
 
